@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.parser.PhpElementTypes;
 import net.king2500.plugins.PhpAdvancedAutoComplete.utils.DbHelper;
 import net.king2500.plugins.PhpAdvancedAutoComplete.utils.FileHelper;
 import net.king2500.plugins.PhpAdvancedAutoComplete.utils.PhpHelper;
+import net.king2500.plugins.PhpAdvancedAutoComplete.utils.YamlHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -215,6 +216,10 @@ public class PhpFunctionCompletionContributor extends CompletionContributor {
 
                     if(methodMatchesAt(funcName, paramIndex, PhpCompletionTokens.obHandlerFuncs, 0)) {
                         resultElements = PhpCompletionTokens.obHandlerElements;
+                    }
+
+                    if (methodMatches(funcName, paramIndex, PhpCompletionTokens.translationFuncs)) {
+                        resultElements = YamlHelper.getYamlKeysFromDirectory(project);
                     }
 
                     if(methodMatchesAt(funcName, paramIndex, PhpCompletionTokens.httpHeaderResponseFuncs, 0)) {
